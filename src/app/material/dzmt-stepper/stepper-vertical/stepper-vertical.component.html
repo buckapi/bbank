@@ -1,0 +1,48 @@
+<!-- <button mat-raised-button color="success" (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button> -->
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Receptor</ng-template>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="email cuenta rceptora" formControlName="firstCtrl"
+[(ngModel)]="firstCtrl"
+         required>
+      </mat-form-field>
+      <div [hidden]="!fail" style="color:red;" >
+          {{message}}
+      </div>
+      <div [hidden]="!waiting" >
+          Buscando, por favor espere
+      </div>
+      <div [hidden]="waiting" >
+
+        <button   (click)="goAmount(stepper)" class="btn btn-success" >Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Monto</ng-template>
+      <mat-form-field>
+        <mat-label>Monto a transferir</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Monto a tansferir"
+           [(ngModel)]="secondCtrl" type="number"   required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Atras</button>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Confirmar</ng-template>
+    <p>Desea confimar la transferencia de fondos?</p>
+    <div>
+      <button mat-button matStepperPrevious>Atras</button>
+      <button  (click)="ok(stepper)" class="btn btn-success" >Si</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

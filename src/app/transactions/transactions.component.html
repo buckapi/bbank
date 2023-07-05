@@ -1,0 +1,65 @@
+<div class="content-body">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="table-responsive table-hover fs-14">
+					<table class="table display mb-4 dataTablesCard dataTable short-one  card-table text-black" id="example5">
+						<thead>
+							<tr>
+								
+								<th></th>
+								<th>Id</th>
+								<th>Tipo</th>
+								<th>Cuenta</th>
+								<th>Monto</th>
+								<th class="float-right">Estado</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let transaction of transactions; let i= index">
+								<td >
+									<img _ngcontent-xhu-c929="" class="ic-icon" src="assets/images/svg/in.svg" *ngIf="transaction.type==='one'  || transaction.type==='five'">
+									<img _ngcontent-xhu-c929="" class="ic-icon" src="assets/images/svg/eg.svg" *ngIf="transaction.type==='two' || transaction.type==='four' || transaction.type==='three'">
+
+
+								</td>
+								<td >
+									{{transaction.ref}}
+								</td>
+								<td >
+									<div class="d-flex align-items-center">
+										
+										<span *ngIf="transaction.type=='one'">carga de fondos</span>
+										<span *ngIf="transaction.type=='two'">carga de fondos a tarjeta</span>
+										<span *ngIf="transaction.type=='three'">transferencia ({{transaction.remitEmail}} -> {{transaction.receptEmail}})</span>
+										<span *ngIf="transaction.type=='five'">abono por transferencia ({{transaction.remitEmail}} -> {{transaction.receptEmail}})</span>
+										<span *ngIf="transaction.type=='four'">retiro de fondos</span>
+									</div>
+								</td>
+								<td class="pr-0" >
+									{{transaction.email}}
+								</td>
+								<td class="wspace-no" >
+									<span class="text-black">{{transaction.ammount}}</span>
+								</td>
+								<td  style="cursor:pointer;">
+									<a (click)="transactionview(transaction)"class="btn-link text-light float-right" *ngIf="transaction.status=='new'" style="cursor:pointer;">PENDING</a>
+									<a href="javascript:void(0);" class="btn-link text-success float-right" *ngIf="transaction.status=='complete'">COMPLETED</a>
+								</td>
+							</tr>
+                        </tbody>
+					</table>
+                    <div class="d-flex justify-content-between p-2">
+                        <ngb-pagination class="mr-3" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="updateTransactionListing()">
+                        </ngb-pagination>
+                        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="updateTransactionListing()">
+                            <option [ngValue]="5">5 resultados por pagina</option>
+                            <option [ngValue]="10">10 resultados por pagina</option>
+                            <option [ngValue]="20">20 resultados por pagina</option>
+                        </select>
+                    </div>
+				</div>	
+			</div>
+		</div>
+    </div>
+</div>

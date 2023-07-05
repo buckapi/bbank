@@ -1,0 +1,35 @@
+<div class="deznav" style="background-color: black;">
+    <div class="deznav-scroll" [perfectScrollbar] *ngIf="_uw.usertype!=undefined">
+        <ul class="metismenu" id="menu" metis-menu [hidden]="_uw.usertype!=='admin'">
+            <li [ngClass]="{'mm-active': dashboardArray.indexOf(currentHref) > -1}"><a class="" [routerLink]="['/admin/accounts']"aria-expanded="false">
+                <i class="flaticon-381-book"></i>
+                <span class="nav-text">Cuentas</span>
+                </a>
+            </li>
+            <li [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class=" ai-icon" [routerLink]="['/admin/creditcards']" aria-expanded="false">
+                    <i class="flaticon-381-id-card"></i>
+                    <span class="nav-text">Tarjetas</span>
+                </a>
+            </li>
+            <li [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class=" ai-icon" [routerLink]="['/admin/transactions']"aria-expanded="false">
+                    <i class="flaticon-381-television"></i>
+                    <span class="nav-text">Transacciones</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="metismenu" id="menu2" metis-menu [hidden]="_uw.usertype!=='customer'">
+            <li [ngClass]="{'mm-active': apsArray.indexOf(currentHref)> -1}"><a class="ai-icon"   [routerLink]="['/admin/mycards']" >
+                <i class="flaticon-381-id-card"></i>
+                <span class="nav-text">Mis tarjetas</span>
+                </a>
+            </li>
+            <li [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}"><a class=" ai-icon"  [routerLink]="['/admin/mytrans']"  >
+                <i class="flaticon-381-book"></i>
+                <span class="nav-text">Mis transacciones</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

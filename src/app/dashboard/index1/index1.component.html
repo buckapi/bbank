@@ -1,0 +1,224 @@
+<div class="content-body">
+    <!-- row -->
+    <div class="container-fluid" *ngIf="_uw.usertype!=undefined">
+        <p *ngFor="let alert of alerts">
+          <ngb-alert [type]="alert.type" (closed)="close(alert)">{{ alert.message }}</ngb-alert>
+        </p>
+        <div *ngIf="fullProfile!=undefined">
+            <div class="row justify-content-center h-100 align-items-center"  [hidden]="_uw.usertype!=='customer' || fullProfile">
+                <div class="col-lg-6 col-md-8">
+                 
+                    Actualizando...
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
+            </div>
+        </div>   
+        <div class="row"  [hidden]="_uw.usertype!=='customer' || !fullProfile">
+            <div class="col-xl-3 col-xxl-4">
+                
+                <div class="card">
+                    <div class="card-header pb-0 border-0"  *ngIf="accounts!=undefined">
+                        <h5 class="mb-0 text-black fs-20">{{accounts[0].email}}</h5>
+                        <div class="dropdown ml-auto dropdown-no-icon" ngbDropdown>
+                            <div class="btn-link" data-toggle="dropdown" ngbDropdownToggle>
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                                <a class="dropdown-item" href="#">Editar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body"  *ngIf="accounts!=undefined">
+                        <div class="text-center">
+                            <img src="assets/images/profile/pic1.jpg" alt= "" class="rounded ds-img-profile">
+                            <h5 class="fs-26 mt-sm-3 mt-2 mb-sm-3 mb-0 font-w600 text-black">Saldo $USD {{saldo}}</h5>   
+                            <p class="mb-0 text-black ">Miembro desde {{accounts[0].createdAt |  date:'mediumDate'}}</p>
+                            <a [routerLink]="['/admin/acc']" class="btn btn-rounded btn-outline-warning mt-sm-4 mt-2"><i class="fa fa-pencil scale5 mr-3"></i># Cuenta Bancaria  </a>
+                        </div>
+                       <!--  <ul class="d-flex justify-content-center share-icon mt-sm-4 mt-3">
+                            <li><a href="javascript:void(0);" class=" btn-outline-success"> <i class="las la-phone"></i></a></li>
+                            <li><a href="javascript:void(0);"><i class="las la-envelope"></i></a></li>
+                    
+                        </ul> -->
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-xl-9 col-xxl-8">
+                 <div class="row">
+                    <div class="col-xl-4 col-sm-6" *ngIf="one">
+                        <div class="card overflow-hidden">
+                            <div class="card-header align-items-start border-0 pb-0" (click)="newRequest('one')"style="cursor:pointer;">
+                                <div class="mr-auto" style="padding-bottom: 12%;">
+                              
+                                    <img style="max-width: 100%;"src="assets/images/operations/bankToUser.png" >
+                                    <h4 class="text-black mb-0 font-w600">Cargar fondos a cuenta</h4>
+                                </div>
+                        
+                            </div>
+                            <div class="card-body p-0">                   
+                               
+                                <div class="chart-wrapper">
+                            
+                                </div>
+                            </div>
+                        </div>                
+                    </div>
+                    <div class="col-xl-4 col-sm-6" disabled="disabled" *ngIf="zero">
+                        <div class="card overflow-hidden">
+                            <div class="card-header align-items-start border-0 pb-0"  (click)="newRequest('zero')"style="cursor:pointer;">
+                                <div class="mr-auto" style="padding-bottom: 12%;">
+                                  
+                                    <img  style="max-width: 100%;"       src="assets/images/operations/newCard.png">
+                                    <h4 class="text-black mb-0 font-w600">Solicitar tarjeta</h4>
+                                </div>
+                        
+                            </div>
+                            <div class="card-body p-0">
+                             
+                                <div class="chart-wrapper">
+                            
+                                </div>
+                            </div>
+                        </div>                
+                    </div>
+                    <div class="col-xl-4 col-sm-6" disabled="disabled" *ngIf="two">
+                        <div class="card overflow-hidden">
+                            <div class="card-header align-items-start border-0 pb-0"  (click)="newRequest('two')"style="cursor:pointer;">
+                                <div class="mr-auto" style="padding-bottom: 12%;">
+                                  
+                                    <img  style="max-width: 100%;"       src="assets/images/operations/userToCard.png">
+                                    <h4 class="text-black mb-0 font-w600">Cargar fondos a tarjeta</h4>
+                                </div>
+                        
+                            </div>
+                            <div class="card-body p-0">
+                             
+                                <div class="chart-wrapper">
+                            
+                                </div>
+                            </div>
+                        </div>                
+                    </div>
+                    <div class="col-xl-4 col-sm-6" *ngIf="three">
+                        <div class="card overflow-hidden">
+                            <div class="card-header align-items-start border-0 pb-0"  (click)="newRequest('three')"style="cursor:pointer;"  enabled="enabled">
+                                <div class="mr-auto" style="padding-bottom: 12%;">
+                                   
+                                    <img  style="max-width: 100%;"   src="assets/images/operations/userToUser.png">
+                                    <h4 class="text-black mb-0 font-w600">Transferir a otro usuario</h4>
+                                </div>
+                           
+                            </div>
+                            <div class="card-body p-0">
+                                
+                              
+                                <div class="chart-wrapper">
+                              
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-6" *ngIf="four && saldo>0">
+                        <div class="card overflow-hidden">
+                            <div class="card-header align-items-start border-0 pb-0"  (click)="newRequest('four')" style="cursor:pointer;">
+                                <div class="mr-auto" style="padding-bottom: 12%;">
+                                   
+                                    <img  style="max-width: 100%;"   src="assets/images/operations/userToBank.png"  enabled="enabled">
+                                    <h4 class="text-black mb-0 font-w600">Retirar fondos</h4>
+                                </div>
+                           
+                            </div>
+                            <div class="card-body p-0">
+                                
+                          
+                                <div class="chart-wrapper">
+                              
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>           
+        </div>
+        
+        <div class="row">
+            <div class="col-xl-6 col-xxl-12" [hidden]="_uw.usertype!=='admin'">
+                <div class="row" >
+                    <div class="col-sm-7"*ngIf="newAccounts!=undefined">
+                        <div class="card">
+                            <div class="card-header border-0 pb-0">
+                                <h4 class="mb-0 text-black fs-20">Nuevos registros</h4>
+                             </div>
+                            <div class="card-body p-3">
+                                <div class="table-responsive">
+                                    <table class="table table-responsive-md mb-0 table-striped" *ngIf="newAccounts!=undefined">
+                                        <thead>
+                                            <tr>
+                                                <th>Email</th>
+                                                <th>Fecha</th>             
+                                            </tr>
+                                        </thead>
+                                        <tbody id="customers">
+                                            <tr class="btn-reveal-trigger" *ngFor="let account of newAccounts;let i = index">   
+                                                <td class="py-3"style="cursor:pointer;">
+                                                    <div class="media d-flex align-items-center">
+                                                        <div class="media-body">
+                                                            <h5 class="mb-0 fs--1">{{account.email}}</h5>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="py-2" (click)="view(i)" style="cursor:pointer;">{{account.createdAt |  date:'mediumDate'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 pt-0 text-center">      
+                                <a  class="btn-link"  [routerLink]="['/admin/accounts']">Ver más <i class="fa fa-caret-right ml-2 scale-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5" *ngIf="newCreditcards!=undefined">
+                        <div class="card">
+                            <div class="card-header border-0 pb-0">
+                                <h4 class="mb-0 text-black fs-20">Solicitudes de tarjeta</h4>
+                             </div>
+                            <div class="card-body p-3">
+                                <div class="table-responsive">
+                                 <table class="table table-responsive-md mb-0 table-striped" *ngIf="newCreditcards!=undefined">
+                                <thead>
+                                    <tr>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr class="btn-reveal-trigger" *ngFor="let creditcard of newCreditcards;let i = index"> 
+                                        <td class="py-3">
+                                            <div class="media d-flex align-items-center">
+                                                <div class="media-body">
+                                                    <h5 class="mb-0 fs--1">{{creditcard.email}}</h5>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 pt-0 text-center">      
+                                <a  class="btn-link"  [routerLink]="['/admin/creditcards']">Ver más <i class="fa fa-caret-right ml-2 scale-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,227 @@
+<div class="content-body">
+    <!-- INIT ZERO -->
+    <div class="container-fluid" *ngIf="_uw.transactionType==='zero'">
+        <div class="row page-titles mx-0" >
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Solicitud nueva tarjeta de crédito</h4>
+                    <!-- <p class="mb-0">Nuevos registros</p> -->
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                </ol>
+            </div>
+        </div>
+        <!--     <div [hidden]="!this.waiting">Cargando...
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div> -->
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-lg-8 col-md-8">
+                <div class="">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form" >
+                                <form (ngSubmit)="goNewCard()"  >
+                                    <div class="form-group form-focus">
+                                        <label class="focus-label"  >Confirma que deseas solicitar una nueva tarjeta de crédito? </label>
+                                    </div>
+                                    <button class="btn btn-success btn-block btn-lg login-btn" type="submit">Solicitar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ZERO -->
+
+    <!-- INIT ONE -->
+    <div class="container-fluid" *ngIf="_uw.transactionType==='one'">
+        <div class="row page-titles mx-0" >
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Solicitud carga de fondos</h4>
+                    <!-- <p class="mb-0">Nuevos registros</p> -->
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                </ol>
+            </div>
+        </div>
+        <!--     <div [hidden]="!this.waiting">Cargando...
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div> -->
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-lg-8 col-md-8">
+                <div class="">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form"  [hidden]="this.waiting">
+                                <form [formGroup]="ngFormOne" (ngSubmit)="go()"  >
+                                    <div class="form-group form-focus">
+                                        <label class="focus-label"  >Monto </label>
+                                        <input type="number" class="form-control floating" id="ammount" placeholder="Monto" [(ngModel)]="transaction.ammount"formControlName="ammount"required [ngClass]="{ 'is-invalid': submitted && fval.ammount.errors }">
+                                        <div *ngIf="submitted && fval.ammount.errors" class="invalid-feedback">
+                                            <div ngClass="fval.ammount.errors.required">
+                                               Campo requerido.
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div [hidden]="!isError">
+                                            <div style="color: red;text-align: left;">
+                                            {{message}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success btn-block btn-lg login-btn" type="submit">Solicitar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ONE -->
+
+     <!-- INIT TWO -->
+    <div class="container-fluid" *ngIf="_uw.transactionType==='two'">
+        <div class="row page-titles mx-0" >
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Solicitud carga de fondos a tarjeta</h4>
+                    <!-- <p class="mb-0">Nuevos registros</p> -->
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                </ol>
+            </div>
+        </div>
+        <!--     <div [hidden]="!this.waiting">Cargando...
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div> -->
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-lg-8 col-md-8">
+                <div class="">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form"  [hidden]="this.waiting">
+                                <form [formGroup]="ngFormTwo" (ngSubmit)="goDepositToCard()"  >
+                                    <div class="form-group form-focus">
+                                        <label class="focus-label"  >Monto </label>
+                                        <input type="number" class="form-control floating" id="ammount" placeholder="Monto" [(ngModel)]="transaction.ammount"formControlName="ammount"required [ngClass]="{ 'is-invalid': submitted2 && fval2.ammount.errors }">
+                                        <div *ngIf="submitted2 && fval2.ammount.errors" class="invalid-feedback">
+                                            <div ngClass="fval2.ammount.errors.required">
+                                               Campo requerido.
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div [hidden]="!isError">
+                                            <div style="color: red;text-align: left;">
+                                            {{message}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success btn-block btn-lg login-btn" type="submit">Cargar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END TWO -->
+
+    <!-- INIT THREE -->
+    <div class="container-fluid" *ngIf="_uw.transactionType==='three'">
+        <div class="row page-titles mx-0" >
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Transferir fondos a terceros</h4>
+                    <!-- <p class="mb-0">Nuevos registros</p> -->
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                </ol>
+            </div>
+        </div>
+        <!--     <div [hidden]="!this.waiting">Cargando...
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div> -->
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-lg-8 col-md-8">
+                <div class="">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                        
+                             <div class="card-body">
+                                <app-stepper-vertical></app-stepper-vertical>
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END THREE -->
+
+    <!-- INIT FOUR -->
+    <div class="container-fluid" *ngIf="_uw.transactionType==='four'">
+        <div class="row page-titles mx-0" >
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Solicitud retiro de fondos</h4>
+                    <!-- <p class="mb-0">Nuevos registros</p> -->
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                </ol>
+            </div>
+        </div>
+        <!--     <div [hidden]="!this.waiting">Cargando...
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div> -->
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-lg-8 col-md-8">
+                <div class="">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form"  [hidden]="this.waiting">
+                                <form [formGroup]="ngFormFour" (ngSubmit)="goRetiro()"  >
+                                    <div class="form-group form-focus">
+                                        <label class="focus-label"  >Monto </label>
+                                        <input type="number" class="form-control floating" id="ammount" placeholder="Monto" [(ngModel)]="transaction.ammount"formControlName="ammount"required [ngClass]="{ 'is-invalid': submitted4 && fval4.ammount.errors }">
+                                        <div *ngIf="submitted4 && fval4.ammount.errors" class="invalid-feedback">
+                                            <div ngClass="fval4.ammount.errors.required">
+                                               Campo requerido.
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div [hidden]="!isError">
+                                            <div style="color: red;text-align: left;">
+                                            {{message}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success btn-block btn-lg login-btn" type="submit">Solicita Retiro</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END FOUR -->
+</div>

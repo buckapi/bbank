@@ -1,0 +1,29 @@
+export interface AccountInterface{
+	id?:string;
+	naccount?:string;
+	numberBankAccount?:string;
+	name?:string;
+	fullname?:string;
+	identity?:string;
+	cnumber?:string;
+	birthday?:string;
+	phone?:string;
+	email?:string;
+	subjectEmail?:string;
+	bankEntity?:string;
+	adminEmail?:string;
+	status?:string;
+	message?:string;
+	type?:string;
+	address?:string;
+	usertype?:string;
+	userId?:string;
+	fullProfile?:boolean;
+	zero?:boolean;
+	one?:boolean;
+	two?:boolean;
+	three?:boolean;
+	four?:boolean;
+	five?:boolean;
+	images?:Array<string>;
+}

@@ -1,0 +1,47 @@
+<div class="content-body">
+  <!-- INIT ZERO -->
+    <div class="container-fluid" >
+        <div class="row page-titles mx-0" >
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4 *ngIf="_uw.transactionToEdit.type==='one'">Procesar carga de fondos</h4>
+                    <h4 *ngIf="_uw.transactionToEdit.type==='four'">Procesar retiro de fondos</h4>  
+                     <h4 *ngIf="_uw.transactionToEdit.type==='three'">Procesar transferencia</h4>
+                    <!-- <p class="mb-0">Nuevos registros</p> -->
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                </ol>
+            </div>
+        </div>
+        <!--     <div [hidden]="!this.waiting">Cargando...
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div> -->
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-lg-8 col-md-8">
+                <div class="">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form" >
+                                <form (ngSubmit)="ok()"  >
+                                    <div class="form-group form-focus">
+                                        <label class="focus-label"  >Cuenta {{_uw.transactionToEdit.email}}</label>
+                                       
+                                    </div> <div class="form-group form-focus">
+                                        <label class="focus-label" *ngIf="_uw.transactionToEdit.type==='three'" >Monto a transferir {{_uw.transactionToEdit.ammount}}</label>
+                                        <label class="focus-label"  *ngIf="_uw.transactionToEdit.type==='one' || _uw.transactionToEdit.type==='four' ">Monto  {{_uw.transactionToEdit.ammount}}</label>
+                                       
+                                    </div>
+                                   
+                                    <button class="btn btn-success btn-block btn-lg login-btn" type="submit">Aprobar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ZERO -->
+</div>

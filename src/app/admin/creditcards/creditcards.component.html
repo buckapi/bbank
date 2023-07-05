@@ -1,0 +1,130 @@
+
+<div class="content-body">
+	<div class="container-fluid">
+		<div >
+			<span [hidden]="!this.waiting || this.clear ||  this.clear2">
+				Nada que mostar por ahora
+			</span>
+		</div>
+			<div [hidden]="!this.waiting">Cargando...
+				<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+			</div>
+		<div class="row page-titles mx-0" *ngIf="!this.clear2">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Solicitudes de tarjeta</h4>
+                    <p class="mb-0">Nuevas solicitudes</p>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                </ol>
+            </div>
+        </div>
+		<div class="row" *ngIf="!this.clear2">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="table-responsive"> 
+							<table class="table table-responsive-md mb-0 table-striped" *ngIf="newCreditcards!=undefined">
+								<thead>
+									<tr>
+										<th>Solicitante</th>
+										<th>Email</th>
+										<th>Fecha</th>
+										<th class="float-right">Status</th>
+									</tr>
+								</thead>
+								<tbody >
+									<tr class="btn-reveal-trigger" *ngFor="let creditcard of newCreditcards;let i = index">
+									<td class="py-2" (click)="view(creditcard,i)" style="cursor:pointer;">{{creditcard.name}}</td>	
+										<td class="py-3" (click)="view(creditcard,i)" style="cursor:pointer;">
+											<div class="media d-flex align-items-center">
+												<div class="media-body">
+													<h5 class="mb-0 fs--1">{{creditcard.email}}</h5>
+												</div>
+											</div>
+										</td>
+										<td class="py-2" (click)="view(creditcard,i)" style="cursor:pointer;">{{creditcard.createdAt |  date:'mediumDate'}}</td>
+											<td (click)="view(creditcard,i)" style="cursor:pointer;">
+											<a class="btn-link text-light float-right">PENDING.</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row page-titles mx-0 " *ngIf="!this.clear">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Tarjetas de crédito </h4>
+                    <p class="mb-0">Tarjetas activas</p>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+            	</ol>
+            </div>
+        </div>
+		<div class="row" *ngIf="!this.clear">			
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="table-responsive"> 
+						<!-- <span [hidden]="!waiting">Loading, please wait...</soan>	  -->
+							<table class="table table-responsive-md mb-0 table-striped" *ngIf="creditcards!=undefined">
+								<thead>
+									<tr>
+										<th>Numero</th>
+										<th>Nombre</th>
+										<th>CVV</th>
+										<th>Fecha caducidad</th>
+										<th>Direccion</th>
+										<th>Cuenta</th>
+										<th  class="float-right">Status</th>
+									</tr>
+								</thead>
+								<tbody >
+									<tr class="btn-reveal-trigger" *ngFor="let creditcard of creditcards">
+										<td class="py-3">
+											<a href="javascript:void(0);">
+												<div class="media d-flex align-items-center">												
+													<div class="media-body">
+														<h5 class="mb-0 fs--1">{{creditcard.number}}</h5>
+													</div>
+												</div>
+											</a>
+										</td>
+										<td class="py-2"><a
+										>{{creditcard.name}}</a>
+										</td>
+										<td class="py-2"><a
+										>{{creditcard.cvv}}</a>
+										</td>
+										<td class="py-2"><a
+										>{{creditcard.caduca}}</a>
+										</td>
+										<td class="py-2"><a
+										>{{creditcard.address}}</a>
+										</td>
+										<td class="py-2"><a
+										>{{creditcard.email}}</a>
+										</td>
+											<td>
+											<a class="btn-link text-success float-right">ACTIVE</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					<!-- 	<app-indeterminate-progress-bar></app-indeterminate-progress-bar> -->
+					<!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

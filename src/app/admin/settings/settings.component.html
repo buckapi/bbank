@@ -1,0 +1,50 @@
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles mx-0" >
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Ajustes de aplicación</h4>
+                    <!-- <p class="mb-0">Nuevos registros</p> -->
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                </ol>
+            </div>
+        </div>
+            <div [hidden]="!this.waiting">Cargando...
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-lg-8 col-md-8">
+                <div class="">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form"  [hidden]="this.waiting">
+                                <form [formGroup]="ngFormSettingsUpdate" (ngSubmit)="activate()"  >
+                                    <div class="form-group form-focus">
+                                        <label class="focus-label"  *ngIf="info!=undefined"> Email de administrador ({{info.adminEmail}})</label>
+                                        <input *ngIf="info!=undefined" type="text" class="form-control floating" id="adminEmail" placeholder="Email de administrador" formControlName="adminEmail" [(ngModel)]="info.adminEmail"required [ngClass]="{ 'is-invalid': submitted && fval.adminEmail.errors }">
+                                        <div *ngIf="submitted && fval.adminEmail.errors" class="invalid-feedback">
+                                            <div ngClass="fval.adminEmail.errors.required">
+                                               Campo requerido.
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div [hidden]="!isError">
+                                            <div style="color: red;text-align: left;">
+                                            {{message}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success btn-block btn-lg login-btn" type="submit">Actualizar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

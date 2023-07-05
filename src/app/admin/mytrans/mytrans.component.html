@@ -1,0 +1,110 @@
+
+<div class="content-body">
+	<div class="container-fluid">
+		<div >
+			<span [hidden]="this.waiting  || !this.clear">
+				Nada que mostar por ahora
+			</span>
+		</div>
+			<div [hidden]="!this.waiting">Cargando...
+				<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+			</div>
+		
+		
+		<div class="row page-titles mx-0 " *ngIf="transactions!=undefined">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Transacciones </h4>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+            	</ol>
+            </div>
+        </div>
+		<div class="row" >			
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="table-responsive"> 
+						<!-- <span [hidden]="!waiting">Loading, please wait...</soan>	  -->
+							<table class="table table-responsive-md mb-0 table-striped" *ngIf="transactions!=undefined">
+								<thead>
+									<tr>
+										<th></th>
+										<th>id</th>
+										<th>Tipo</th>
+										<th>Monto</th>
+										<th>Fecha</th>
+										<th class="float-right">Status</th>
+									</tr>
+								</thead>
+								<tbody id="customers">
+									<tr class="btn-reveal-trigger" *ngFor="let transaction of transactions">
+										
+										<td class="pr-0" *ngIf="transaction.type==='one'">
+											<img _ngcontent-xhu-c929="" class="ic-icon" src="assets/images/svg/in.svg">
+										</td>
+										<td class="pr-0" *ngIf="transaction.type==='two'">
+											<img _ngcontent-xhu-c929="" class="ic-icon" src="assets/images/svg/eg.svg">
+										</td>
+										<td class="pr-0" *ngIf="transaction.type==='four'">
+											<img _ngcontent-xhu-c929="" class="ic-icon" src="assets/images/svg/eg.svg">
+										</td>
+										<td class="pr-0" *ngIf="transaction.type==='three'">
+											<img _ngcontent-xhu-c929="" class="ic-icon" src="assets/images/svg/eg.svg">
+										</td>
+										<td class="pr-0" *ngIf="transaction.type==='five'">
+											<img _ngcontent-xhu-c929="" class="ic-icon" src="assets/images/svg/in.svg">
+										</td>
+<td class="py-2"><a
+										>{{transaction.ref }}</a>
+										</td>
+
+
+										<td class="py-2" *ngIf="transaction.type==='one'">
+											Carga de fondos a cuenta
+										</td>
+										<td class="py-2" *ngIf="transaction.type==='four'">
+											Retiro de fondos
+										</td>
+										<td class="py-2" *ngIf="transaction.type==='two'">
+											Carga de fondos a tarjeta
+										</td>
+										<td class="py-2" *ngIf="transaction.type==='three'">
+											Transferencia ({{transaction.remitEmail}} -> {{transaction.receptEmail}})
+										</td>
+										<td class="py-2" *ngIf="transaction.type==='five'">
+											Recibido por transferencia 
+											({{transaction.remitEmail}} -> {{transaction.receptEmail}})
+										</td>
+										<td class="py-3">
+											<a href="javascript:void(0);">
+												<div class="media d-flex align-items-center">												
+													<div class="media-body">
+														<h5 class="mb-0 fs--1">{{transaction.ammount}}</h5>
+													</div>
+												</div>
+											</a>
+										</td>
+										<td class="py-2"><a
+										>{{transaction.createdAt |  date:'mediumDate'}}</a>
+										</td>
+										<td *ngIf="transaction.status==='complete'">
+											<a class="btn-link text-success float-right">COMPLETED</a>
+										</td>
+										<td *ngIf="transaction.status==='new'">
+											<a class="btn-link text-light float-right">PENDING</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					<!-- 	<app-indeterminate-progress-bar></app-indeterminate-progress-bar> -->
+					<!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

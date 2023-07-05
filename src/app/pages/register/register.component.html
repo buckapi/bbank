@@ -1,0 +1,84 @@
+
+<div class="authincation h-100">
+        <div class="container vh-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+									<div class="text-center mb-3">
+										<a [routerLink]="['/admin/index']"><img src="assets/images/logo-full.png" alt=""></a>
+									</div>
+                                    <h4 class="text-center mb-4">Crea tu cuenta</h4>
+                                    <form [formGroup]="ngFormSignup" (ngSubmit) ="onRegister()">
+                                        <div class="form-group form-focus">
+                                            <label class="focus-label">Nombre </label>
+                                            <input type="text" class="form-control floating" id="name" formControlName="name" placeholder="Nombre" [(ngModel)]="user.name" [ngClass]="{'is-invalid': submitted && fval.name.errors }"required>
+                                            <div *ngIf="submitted && fval.name.errors" class="invalid-feedback">
+                                                <div *ngIf="fval.name.errors.required">
+                                               El nombre es requerido y debe ser un nombre válido
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-focus">
+                                            <label class="focus-label">Apellidos </label>
+                                            <input type="text" class="form-control floating" id="fullname" formControlName="fullname" placeholder="Apellidos" [(ngModel)]="user.fullname" [ngClass]="{'is-invalid': submitted && fval.fullname.errors }"required>
+                                            <div *ngIf="submitted && fval.fullname.errors" class="invalid-feedback">
+                                                <div *ngIf="fval.fullname.errors.required">
+                                               Campo requerido 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-focus">
+                                            <label class="focus-label">e-mail</label>
+                                                <input type="email" class="form-control floating" id="email" placeholder="Email" formControlName="email" [(ngModel)]="user.email" required [ngClass]="{ 'is-invalid': submitted && fval.email.errors }">
+                                            <div *ngIf="submitted && fval.email.errors" class="invalid-feedback">
+                                                <div *ngIf="fval.email.errors.required">El email es requerido</div>
+                                                <div *ngIf="fval.email.errors.email">Ingrese un email válido</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-focus">
+                                            <label class="focus-label">Contraseña</label>
+                                            <input type="password" class="form-control" id="password" formControlName="password" placeholder="*******" [(ngModel)]="user.password" [ngClass]="{ 'is-invalid': submitted && fval.password.errors}" required>
+                                            <div *ngIf="submitted && fval.password.errors"class="invalid-feedback">
+                                                <div ngClass="fval.password.errors.required">
+                                                La contraseña es requerida.
+                                                </div>
+                                            <div *ngIf="fval.password.errors.minlength">La contraseña debe contener mínimo 6 caracteres</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-focus">
+                                            <input type="checkbox" (click)="setPolitics()"> <a class="forgot-link" href="https://www.buckapi.com/bbevolutionbank/terms.pdf" target="_blank">He leído y acepto la Política de Privacidad</a>
+                                        </div>
+                                        <div style="text-align: center;"  [hidden]="!waiting">
+                                        <img src="assets/images/tenor.gif"	 style="max-height: 32px;max-width: 32px; text-align: center;	">
+                                        <p></p>
+                                        </div>
+                                        <button class="btn btn-success btn-block btn-lg login-btn" type="submit" disabled="disabled" [hidden]="!waiting &&  politics">Enviar</button>
+                                        <button class="btn btn-success btn-block btn-lg login-btn" type="submit" [hidden]="waiting  ||  !politics" >Enviar</button>
+                                        <!-- <div class="login-or">
+                                            <span class="or-line"></span>
+                                            <span class="span-or">o</span>
+                                        </div> -->
+                                        <div [hidden]="!isError">
+                                            <div style="color: red;text-align: left;">
+                                            {{message}}
+                                            </div>
+
+                                        </div>
+                                      
+                                        
+                                        
+                                    </form>
+                                    <div class="new-account mt-3">
+                                        <p>Ya tienes una cuenta? <a class="text-primary" [routerLink]="['/page-login']">Entrar</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
