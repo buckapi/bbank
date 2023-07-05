@@ -45,14 +45,14 @@ export class AuthService {
 		});
 
 	registerUser(name :string, fullname :string, email: string, password: string, usertype: string, status: string){
-		const url_api ='https://db.bbevolutionbank.com:3025/api/Users/';
+		const url_api ='https://db.buckapi.us:9999/api/Users/';
 		return this.http
 		.post<UserInterface>(url_api,{name,fullname,email,password,usertype,status},{headers:this.headers})
 		.pipe(map(data => data,error => error),catchError(this.handleError));
 	}
 
 	loginUser(email:string, password:string):Observable<any>{
-		const url_api ='https://db.bbevolutionbank.com:3025/api/Users/login?include=user';
+		const url_api ='https://db.buckapi.us:9999/api/Users/login?include=user';
 		return this.http
 		.post<UserInterface>(url_api,{email,password},{headers:this.headers})
 		.pipe(map(data => data,error => error),catchError(this.handleError));
@@ -80,7 +80,7 @@ export class AuthService {
   		}
 	 logoutUser(){
 	  	let accessToken = localStorage.getItem('accessToken');
-		  	const url_api = 'https://db.bbevolutionbank.com:3025/api/users/logout?access_token=${accessToken}';
+		  	const url_api = 'https://db.buckapi.us:9999/api/users/logout?access_token=${accessToken}';
 		   	localStorage.removeItem('accessToken');
 		  	localStorage.removeItem('currentUser');
 		  	return this.http.post<UserInterface>(url_api,{headers: this.headers});
